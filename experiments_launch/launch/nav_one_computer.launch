@@ -28,18 +28,18 @@
 
 
 <!-- teleop node -->
-<node pkg="mixed_initiative_teleop" type="mixed_initiative_teleop" respawn="false" name="mi_teleop" output="screen"/>
+<node pkg="mixed_initiative_teleop" type="mixed_initiative_teleop" name="mi_teleop" output="screen"/>
 
 
 <!-- cmd mixer for choosing autonomy mode or e.g. emergency stop if nav doesnt work good. (buttons for teleoperation - stop - autonomy mode) -->
 <!-- In xbox controller Y =  teleop , A = auto , B = stop (in any case) -->
-<node pkg="mixed_initiative_controller" type="mixed_initiative_controller" respawn="false" name="mi_controller" output="screen"/>
+<node pkg="mixed_initiative_controller" type="mixed_initiative_controller_node" name="mi_controller" output="screen"/>>
 
 
 <!-- tf transform -->
 <!-- approximative measures -->
 <!-- args ="x y z qx qy qz frame_id child_frame_id period_in_ms" -->
-<node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.20 0 0.19 0 0 0 base_link base_laser 50" />
+<node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.20 0 0.20 0 0 0 base_link base_laser 50" />
 
   
 <!-- Gmapping SLAM -->
