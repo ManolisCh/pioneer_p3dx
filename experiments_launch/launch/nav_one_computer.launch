@@ -24,7 +24,6 @@
   <node respawn="true" pkg="joy" type="joy_node" name="joy_node" >
     <param name="dev" type="string" value="/dev/input/js0" />
     <param name="deadzone" value="0.15" />
-    <!--param name="autorepeat_rate" type="double" value="50.0" /-->
   </node>
 
 

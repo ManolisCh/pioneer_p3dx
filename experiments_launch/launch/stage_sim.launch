@@ -14,8 +14,7 @@
   <node respawn="true" pkg="joy" type="joy_node" name="joy_node" >
     <param name="dev" type="string" value="/dev/input/js0" /> <!-- change this /jsX depending on your joystick port -->
     <param name="deadzone" value="0.15" />
-    <param name="autorepeat_rate" type="double" value="10.0" />
-  </node>
+     </node>
 
 <!-- teleop node -->
 <node pkg="mixed_initiative_teleop" type="mixed_initiative_teleop" name="mi_teleop" output="screen"/>
