@@ -1,6 +1,6 @@
 <launch>
 
-<!-- Navigation, teleop and SLAM for use one computer -->
+<!-- Launch file for use on robot computer. Runs the nodes on robot -->
 
   
 <!-- RosAria pioneer drivers -->
@@ -20,28 +20,12 @@
   </node>
 
 
-<!-- joy node -->
-  <node respawn="true" pkg="joy" type="joy_node" name="joy_node" >
-    <param name="dev" type="string" value="/dev/input/js0" />
-    <param name="deadzone" value="0.15" />
-  </node>
-
-
-<!-- teleop node -->
-<node pkg="mixed_initiative_teleop" type="mixed_initiative_teleop" name="mi_teleop" output="screen"/>
-
-
-<!-- cmd mixer for choosing autonomy mode or e.g. emergency stop if nav doesnt work good. (buttons for teleoperation - stop - autonomy mode) -->
-<!-- In xbox controller Y =  teleop , A = auto , B = stop (in any case) -->
-<node pkg="mixed_initiative_controller" type="mixed_initiative_controller_node" name="mi_controller" output="screen"/>>
-
-
 <!-- tf transform -->
 <!-- approximative measures -->
 <!-- args ="x y z qx qy qz frame_id child_frame_id period_in_ms" -->
 <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.20 0 0.20 0 0 0 base_link base_laser 50" />
 
-  
+
 <!-- Gmapping SLAM -->
 <include file="$(find experiments_launch)/launch/slam_gmapping.launch"/>
 
@@ -52,11 +36,6 @@
 
 <!-- Frontier exploration -->
  <include file="$(find experiments_launch)/launch/frontier_exploration.launch"/>
-
-
-<!-- Hector trajectory server for keeping history and visualizing of all the paths visited -->
-<node pkg="hector_trajectory_server" type="hector_trajectory_server" name="trajectory_server" output="screen"/>
-  
 
 
 </launch>
