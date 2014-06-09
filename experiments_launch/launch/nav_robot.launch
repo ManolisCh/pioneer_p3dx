@@ -29,6 +29,9 @@
 <!-- Gmapping SLAM -->
 <include file="$(find experiments_launch)/launch/slam_gmapping.launch"/>
 
+<!-- Hector SLAM -->
+<!--include file="$(find experiments_launch)/launch/hector_slam.launch"/-->
+
 
 <!-- Navigation stuff / move_base -->
 <include file="$(find experiments_launch)/launch/move_base.launch"/>

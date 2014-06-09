@@ -11,14 +11,14 @@ obstacle_range: 4 #maximum range sensor reading that will result in an obstacle 
 raytrace_range: 4 #range in meters at which to raytrace out obstacles from the map using sensor data. This can be over-ridden on a per-sensor basis.
 
 #The footprint of the robot 
-footprint: [ [0.200, -0.0508], [0.1778, -0.0508], [0.1778, -0.1778], [-0.1905, -0.1778], [-0.254, 0], [-0.1905, 0.1778], [0.1778, 0.1778], [0.1778, 0.0508], [0.200, 0.0508] ]
+footprint: [ [-0.05, 0.20], [0.22, 0.20], [0.22, -0.20], [-0.05, -0.20], [-0.05, -0.17], [-0.22, -0.17], [-0.22, -0.17], [-0.22, 0.17], [-0.05, 0.17] ]
 
 #Inscribed and circumscribed radius 
 #inscribed_radius: 0.2
 #circumscribed_radius: 0.3
 
 #Cost function parameters
-inflation_radius: 0.25
+inflation_radius: 0.35
 #cost_scaling_factor: 10.0
 
 #The cost at which a cell is considered an obstacle when a map is read from the map_server
