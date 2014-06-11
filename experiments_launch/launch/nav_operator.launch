@@ -17,10 +17,13 @@
 <node pkg="mixed_initiative_controller" type="mixed_initiative_controller" name="mi_controller" output="screen"/>>
 
 
-
 <!-- Hector trajectory server for keeping history and visualizing of all the paths visited -->
 <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="trajectory_server" output="screen"/>
   
+<!-- rviz for visualization-->
 <node pkg="rviz" type="rviz" name="rviz" output="screen"/>
+
+<!-- Frontier exploration -->
+ <include file="$(find experiments_launch)/launch/frontier_exploration.launch"/>
 
 </launch>

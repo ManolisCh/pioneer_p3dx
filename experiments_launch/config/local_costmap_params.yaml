@@ -3,7 +3,7 @@
 local_costmap:
 
   #Set the global and robot frames for the costmap
-  global_frame: /map #maybe /odom but in a real robot
+  global_frame: /map
   robot_base_frame: base_link
 
   #Set the update and publish frequency of the costmap

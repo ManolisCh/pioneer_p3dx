@@ -5,9 +5,12 @@
   
 <!-- RosAria pioneer drivers -->
 <node pkg="rosaria" type="RosAria" name="RosAria" >
-  <param name="port" type="string" value="/dev/ttyUSB0" />
+  <param name="port" value="/dev/ttyUSB0" />
+  <param name="trans_deccel" value="1.2"/>
+  <param name="trans_accel" value="0.7"/>
   <remap from="/RosAria/cmd_vel" to="/cmd_vel" />
   <remap from="/RosAria/pose" to="odom" />
+  
  </node>
 
 
@@ -21,7 +24,6 @@
 
 
 <!-- tf transform -->
-<!-- approximative measures -->
 <!-- args ="x y z qx qy qz frame_id child_frame_id period_in_ms" -->
 <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.20 0 0.20 0 0 0 base_link base_laser 50" />
 
@@ -32,13 +34,11 @@
 <!-- Hector SLAM -->
 <!--include file="$(find experiments_launch)/launch/hector_slam.launch"/-->
 
-
 <!-- Navigation stuff / move_base -->
 <include file="$(find experiments_launch)/launch/move_base.launch"/>
 
-
-<!-- Frontier exploration -->
- <include file="$(find experiments_launch)/launch/frontier_exploration.launch"/>
+<!-- usb_cam -->
+<include file="$(find experiments_launch)/launch/usb_cam.launch"/>
 
 
 </launch>
