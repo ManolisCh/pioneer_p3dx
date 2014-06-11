@@ -97,6 +97,12 @@ void Controller::navCallback(const geometry_msgs::Twist& msg)
       cmdVel_.angular.z = msg.angular.z;
       vel_pub_.publish(cmdVel_);
     }
+  if (control_mode_ == 0)
+    {
+      cmdVel_.linear.x = 0;
+      cmdVel_.angular.z = 0;
+      vel_pub_.publish(cmdVel_);
+    }
 }
 
 void Controller::teleopCallback(const geometry_msgs::Twist& msg)
@@ -105,6 +111,12 @@ void Controller::teleopCallback(const geometry_msgs::Twist& msg)
     {
       cmdVel_.linear.x = msg.linear.x;
       cmdVel_.angular.z = msg.angular.z;
+      vel_pub_.publish(cmdVel_);
+    }
+  if (control_mode_ == 0)
+    {
+      cmdVel_.linear.x = 0;
+      cmdVel_.angular.z = 0;
       vel_pub_.publish(cmdVel_);
     }
 }
