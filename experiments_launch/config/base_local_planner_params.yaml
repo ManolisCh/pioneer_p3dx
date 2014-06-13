@@ -14,14 +14,14 @@ TrajectoryPlannerROS:
   #Set the acceleration limits of the robot in meters/sec^2  
   acc_lim_x: 0.5
   acc_lim_y: 0
-  acc_lim_th: 2 
+  acc_lim_th: 4 
 
   #Set the velocity limits of the robot
   max_vel_x: 0.6
   min_vel_x: 0.1
   escape_vel: -0.1
 
-  max_trans_vel: 0.6 
+  max_trans_vel: 0.5 
   min_trans_vel: 0.1
 
   max_rot_vel: 1
@@ -40,7 +40,7 @@ TrajectoryPlannerROS:
   #Forward Simulation Parameters
   #We'll configure how long and with what granularity we'll forward simulate trajectories
   sim_time: 1.7 # 2 * (goal_tolerance) >  ( min_vel * sime_time ) ... ore else the robot wont move
-  sim_granularity: 0.015
+  sim_granularity: 0.025
 
  #The number of samples to use when exploring the x velocity space
   vx_samples: 10 # for DWA planner 8 - 15 depending on the processing power. This allows for non-circular curves. 
