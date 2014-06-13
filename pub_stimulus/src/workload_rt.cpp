@@ -1,6 +1,6 @@
 
 #include <ros/ros.h>
-#include <std_msgs/Float64.h>
+#include <pub_stimulus/ReactionTime.h>
 #include <pub_stimulus/TargetStimulus.h>
 #include <sensor_msgs/Joy.h>
 
@@ -12,7 +12,7 @@ public:
   WorkloadReactionTime()
   {
     pressed_ = true; // must initialised like that for flag further down to work
-    rt_pub_ = nh_.advertise<std_msgs::Float64>("/workload/RT", 1);
+    rt_pub_ = nh_.advertise<pub_stimulus::ReactionTime>("/workload/RT", 1);
     joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("/joy", 1 , &WorkloadReactionTime::joyPublishedCallBack,this);
     target_sub = nh_.subscribe<pub_stimulus::TargetStimulus>("/workload/target_published", 1 ,
                                                              &WorkloadReactionTime::targetPublishedCallBAck,this);
@@ -22,7 +22,7 @@ private:
   ros::NodeHandle nh_;
   ros::Publisher rt_pub_ ;
   ros::Subscriber joy_sub_, target_sub;
-  std_msgs::Float64 reactionTime_;
+  pub_stimulus::ReactionTime reactionTime_;
   bool published_, pressed_;
   double timePublished_;
 
@@ -56,11 +56,12 @@ void WorkloadReactionTime::joyPublishedCallBack(const sensor_msgs::Joy::ConstPtr
 
   if (published_  == true && pressed_ == false && msg->buttons[5] == true)
     {
-      reactionTime_.data = msg->header.stamp.toSec() - timePublished_ ;
+      reactionTime_.reactionTime.data = msg->header.stamp.toSec() - timePublished_ ;
+      reactionTime_.header.stamp = ros::Time::now();
       rt_pub_.publish(reactionTime_);
       //published_ = false ;
       pressed_ = true;
-      ROS_INFO("RT is: %f", reactionTime_.data);
+      ROS_INFO("RT is: %f", reactionTime_.reactionTime.data);
     }
 }
 
