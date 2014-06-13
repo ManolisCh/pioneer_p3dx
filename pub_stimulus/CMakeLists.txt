@@ -120,6 +120,11 @@ target_link_libraries(pub_stimulus
   ${ROS_LIBRARIES}
 )
 
+target_link_libraries(workload_rt
+  ${catkin_LIBRARIES}
+  ${ROS_LIBRARIES}
+)
+
 #############
 ## Install ##
 #############
