@@ -13,7 +13,7 @@ local_costmap:
   #We'll configure this costmap to be a rolling window... meaning it is always centered at the robot
   static_map: false
   rolling_window: true
-  width: 8.0
-  height: 8.0
+  width: 3.0
+  height: 3.0
   resolution: 0.025
 
