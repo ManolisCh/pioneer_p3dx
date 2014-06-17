@@ -1,0 +1,23 @@
+<launch>
+
+
+<!-- launch rosbag tool but record certain topics-->
+<node pkg="rosbag" type="record" name="rosbag"
+
+       args="-o /home/manolis/rosbags/experiment1 
+
+ /rosout
+ /control_mode
+ /workload/img_stimulus/compressed
+ /rosout
+ /workload/img_stimulus
+ /rosout_agg
+ /workload/RT
+ /joy
+ /workload/target_published
+ /diagnostics
+ /teleop/cmd_vel
+ /cmd_vel"/>
+
+
+</launch>
