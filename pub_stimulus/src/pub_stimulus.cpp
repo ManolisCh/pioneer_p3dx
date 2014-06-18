@@ -14,11 +14,11 @@
 
 
 
-class PublishStimulus
+class StatusPublisher
 {
 public:
 
-  PublishStimulus();
+  StatusPublisher();
   void run();
 
 private:
@@ -38,13 +38,13 @@ private:
 
 
 // Constractor
-PublishStimulus::PublishStimulus(): it_(nh_)
+StatusPublisher::StatusPublisher(): it_(nh_)
 {
 
   stimulus_pub_ = it_.advertise("/workload/img_stimulus", 1);
   targetPublished_pub = nh_.advertise<pub_stimulus::TargetStimulus>("/workload/target_published", 1);
 
-  timerTarget_ = nh_.createTimer(ros::Duration(5), &PublishStimulus::timerTargetCallback, this);
+  timerTarget_ = nh_.createTimer(ros::Duration(5), &StatusPublisher::timerTargetCallback, this);
 
 
   // Path where the image stimulus is
@@ -77,7 +77,7 @@ PublishStimulus::PublishStimulus(): it_(nh_)
 
 }
 
-void PublishStimulus::timerTargetCallback(const ros::TimerEvent&)
+void StatusPublisher::timerTargetCallback(const ros::TimerEvent&)
 {
   stimulus_pub_.publish(rosImageTarget_);
   targetPublishedMsg_.published.data = true;
@@ -89,7 +89,7 @@ void PublishStimulus::timerTargetCallback(const ros::TimerEvent&)
 
 
 // Definitiion of run() function that has the main functionality
-void PublishStimulus::run()
+void StatusPublisher::run()
 {
   stimulus_pub_.publish(rosImageBackground_);
 }
@@ -100,7 +100,7 @@ int main(int argc, char** argv)
 
   ros::init(argc, argv, "pub_stimulus");
 
-  PublishStimulus publishstimulus;
+  StatusPublisher publishstimulus;
 
 
   ros::Rate loop_rate(5);

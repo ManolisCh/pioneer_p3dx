@@ -20,5 +20,8 @@
 <node pkg="pub_stimulus" type="pub_stimulus" name="pub_stimulus" output="screen"/>
 <node pkg="pub_stimulus" type="workload_rt" name="workload_rt" output="screen"/>
 
+<!-- rosbag -->
+ <include file="$(find experiments_launch)/launch/rosbag.launch"/>
+
 
 </launch>
