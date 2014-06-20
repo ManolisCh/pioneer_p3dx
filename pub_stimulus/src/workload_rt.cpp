@@ -39,14 +39,14 @@ void WorkloadReactionTime::targetPublishedCallBAck(const pub_stimulus::TargetSti
 
   if (published_ == true && pressed_== false)
     {
-       ROS_INFO("Response pending to previous target...ignoring last target");
+      // ROS_INFO("Response pending to previous target...ignoring last target");
     }
 
   if (published_ == true && pressed_== true)
     {
       timePublished_ = msg->header.stamp.toSec() ; // Store the time that the target stimulus appeared/published
       pressed_ = false;
-      ROS_INFO("Target published");
+      //ROS_INFO("Target published");
 
     }
  }
@@ -61,7 +61,7 @@ void WorkloadReactionTime::joyPublishedCallBack(const sensor_msgs::Joy::ConstPtr
       rt_pub_.publish(reactionTime_);
       //published_ = false ;
       pressed_ = true;
-      ROS_INFO("RT is: %f", reactionTime_.reactionTime.data);
+      //ROS_INFO("RT is: %f", reactionTime_.reactionTime.data);
     }
 }
 

@@ -7,7 +7,7 @@
 
     <node pkg="frontier_exploration" type="explore_server" name="explore_server" output="screen" >
 
-        <param name="frequency" type="double" value="5.0"/>
+        <param name="frequency" type="double" value="2.0"/>
         <param name="goal_aliasing" type="double" value="$(arg sensor_range)"/>
 
   #All standard costmap_2d parameters as in move_base, other than BoundedExploreLayer
@@ -16,8 +16,8 @@
             footprint: [ [-0.05, 0.20], [0.22, 0.20], [0.22, -0.20], [-0.05, -0.20], [-0.05, -0.17], [-0.22, -0.17], [-0.22, -0.17], [-0.22, 0.17], [-0.05, 0.17] ]
             
             transform_tolerance: 0.3
-            update_frequency: 4.0
-            publish_frequency: 2.0
+            update_frequency: 5.0
+            publish_frequency: 5.0
 
             #must match incoming static map
             global_frame: map
@@ -50,7 +50,7 @@
                 laser: {data_type: LaserScan, clearing: true, marking: true, topic: scan, inf_is_valid: true, raytrace_range: $(arg sensor_range), obstacle_range: $(arg sensor_range)}
 
             inflation:
-                inflation_radius: 0.2
+                inflation_radius: 0.4
       </rosparam>
     </node>
 

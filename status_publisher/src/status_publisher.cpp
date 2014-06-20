@@ -164,7 +164,7 @@ void StatusPublisher::navStatusCallBack(const actionlib_msgs::GoalStatusArray::C
         navStatus_pub_.publish(rosImageNavAborted_);
 
       else {
-          ROS_INFO("Status Something else?? Check /move_base/status for code");
+          //ROS_INFO("Status Something else?? Check /move_base/status for code");
         }
 
     }
