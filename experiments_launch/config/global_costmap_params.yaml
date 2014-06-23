@@ -12,6 +12,7 @@ global_costmap:
 
   #true, means that the global map for planning will come ready made from the slam algorithm 
   static_map: true
+  resolution: 0.025
 
 
 

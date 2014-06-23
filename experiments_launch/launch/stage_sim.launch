@@ -33,12 +33,15 @@
 <!-- Navigation stuff / move_base -->
 <include file="$(find experiments_launch)/launch/move_base.launch"/>
 
+<!-- Frontier exploration -->
+<include file="$(find experiments_launch)/launch/frontier_exploration.launch"/>
+
 <!-- secondary workload task-->
 <node pkg="pub_stimulus" type="pub_stimulus" name="pub_stimulus" output="screen"/>
 <node pkg="pub_stimulus" type="workload_rt" name="workload_rt" output="screen"/>
 
 <!-- mode and status visualising node -->
-<node pkg="status_publisher" type="status_publisher" name="status_publisher" output="screen">
+<node pkg="status_publisher" type="status_publisher" name="status_publisher" output="screen"/>
 
 
 </launch>

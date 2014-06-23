@@ -83,7 +83,7 @@ void StatusPublisher::timerTargetCallback(const ros::TimerEvent&)
   targetPublishedMsg_.published.data = true;
   targetPublishedMsg_.header.stamp = ros::Time::now();
   targetPublished_pub.publish(targetPublishedMsg_);
-  ros::Duration(0.2).sleep();
+  ros::Duration(0.200).sleep(); // target remains for 200ms
 
 }
 
