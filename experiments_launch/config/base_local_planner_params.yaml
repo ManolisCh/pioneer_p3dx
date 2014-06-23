@@ -28,23 +28,24 @@ TrajectoryPlannerROS:
 
   #Set the tolerance on achieving a goal. With bad lacalazation put hight tolerence.
   xy_goal_tolerance: 0.1
-  yaw_goal_tolerance: 0.05 
+  yaw_goal_tolerance: 0.08 
 
   #Forward Simulation Parameters
   #We'll configure how long and with what granularity we'll forward simulate trajectories
-  sim_time: 1 # 2 * (goal_tolerance) >  ( min_vel * sim_time ) ... ore else the robot wont move
+  sim_time: 1.5 # 2 * (goal_tolerance) >  ( min_vel * sim_time ) ... ore else the robot wont move
   sim_granularity: 0.025
 
   #The number of samples to use when exploring the x and theta velocity space
-  #vx_samples: 10 # for DWA planner 8 - 15 depending on the processing power. This allows for non-circular curves. 
+  vx_samples: 15 # for DWA planner 8 - 15 depending on the processing power. This allows for non-circular curves. 
   vtheta_samples: 20
+
 
   #Parameters for scoring trajectories 
   publish_cost_grid_pc: true  # publish the cost used when planning as pointcloud2 at <name>/cost_cloud topic
   meter_scoring: true
   forward_point_distance: 0.325 # default 0.325. The distance from the center point of robot to place an additional scoring point
   pdist_scale: 0.8 #weight on how much should stay close to path 
-  gdist_scale: 0.7 #weight on how much should attempt to reach is local goal, also controls speed.
+  gdist_scale: 0.75 #weight on how much should attempt to reach is local goal, also controls speed.
   occdist_scale:: 0.01 #weight on how much should attempt to avoid obstacles (in my experience leave like that!)
 
  
