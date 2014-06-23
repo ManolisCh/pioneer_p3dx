@@ -23,7 +23,7 @@
 
 <!-- cmd mixer for choosing autonomy mode or e.g. emergency stop if nav doesnt work good. (buttons for teleoperation - stop - autonomy mode) -->
 <!-- In xbox controller Y =  teleop , A = auto , B = stop (in any case) -->
-<node pkg="mixed_initiative_controller" type="mixed_initiative_controller_node" name="mi_controller" output="screen"/>
+<node pkg="mixed_initiative_controller" type="mixed_initiative_controller" name="mi_controller" output="screen"/>
 
 
 <!-- Gmapping SLAM -->
