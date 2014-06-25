@@ -44,7 +44,7 @@ StatusPublisher::StatusPublisher(): it_(nh_)
   stimulus_pub_ = it_.advertise("/workload/img_stimulus", 1);
   targetPublished_pub = nh_.advertise<pub_stimulus::TargetStimulus>("/workload/target_published", 1);
 
-  timerTarget_ = nh_.createTimer(ros::Duration(5), &StatusPublisher::timerTargetCallback, this);
+  timerTarget_ = nh_.createTimer(ros::Duration(10), &StatusPublisher::timerTargetCallback, this);
 
 
   // Path where the image stimulus is
