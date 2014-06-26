@@ -25,6 +25,7 @@
                 /usb_cam/image_raw/compressed
                 /usb_cam/camera_info
                 /control_mode
+                /experiment_started
               	/robot_status/nav/compressed
 		/robot_status/mode/compressed/parameter_descriptions
  		/robot_status/nav/compressed/parameter_updates

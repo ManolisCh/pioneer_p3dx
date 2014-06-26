@@ -43,7 +43,7 @@ StatusPublisher::StatusPublisher(): it_(nh_)
 
   stimulus_pub_ = it_.advertise("/workload/img_stimulus", 1);
   targetPublished_pub = nh_.advertise<pub_stimulus::TargetStimulus>("/workload/target_published", 1);
-
+    // The ros Duration controls the period in sec. that the target will appear.
   timerTarget_ = nh_.createTimer(ros::Duration(10), &StatusPublisher::timerTargetCallback, this);
 
 

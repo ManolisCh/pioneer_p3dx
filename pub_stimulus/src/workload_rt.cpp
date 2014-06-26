@@ -1,5 +1,6 @@
 
 #include <ros/ros.h>
+#include <std_msgs/Bool.h>
 #include <pub_stimulus/ReactionTime.h>
 #include <pub_stimulus/TargetStimulus.h>
 #include <sensor_msgs/Joy.h>
@@ -12,6 +13,7 @@ public:
   WorkloadReactionTime()
   {
     pressed_ = true; // must initialised like that for flag further down to work
+    experiment_init_pub_ = nh_.advertise<std_msgs::Bool>("/experiment_started", 1);
     rt_pub_ = nh_.advertise<pub_stimulus::ReactionTime>("/workload/RT", 1);
     joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("/joy", 1 , &WorkloadReactionTime::joyPublishedCallBack,this);
     target_sub = nh_.subscribe<pub_stimulus::TargetStimulus>("/workload/target_published", 1 ,
@@ -20,7 +22,7 @@ public:
 private:
 
   ros::NodeHandle nh_;
-  ros::Publisher rt_pub_ ;
+  ros::Publisher rt_pub_ , experiment_init_pub_;
   ros::Subscriber joy_sub_, target_sub;
   pub_stimulus::ReactionTime reactionTime_;
   bool published_, pressed_;
@@ -54,7 +56,16 @@ void WorkloadReactionTime::targetPublishedCallBAck(const pub_stimulus::TargetSti
 void WorkloadReactionTime::joyPublishedCallBack(const sensor_msgs::Joy::ConstPtr& msg)
 {
 
-  if (published_  == true && pressed_ == false && msg->buttons[5] == true)
+  if (msg->buttons[5] == true)
+    {
+      std_msgs::Bool started;
+      started.data = true;
+      experiment_init_pub_.publish(started);
+
+    }
+
+
+  if (published_  == true && pressed_ == false && msg->buttons[4] == true)
     {
       reactionTime_.reactionTime.data = msg->header.stamp.toSec() - timePublished_ ;
       reactionTime_.header.stamp = ros::Time::now();
