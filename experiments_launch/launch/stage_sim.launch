@@ -12,7 +12,7 @@
 
 <!-- joy node for aka joystick drivers-->
   <node respawn="true" pkg="joy" type="joy_node" name="joy_node" >
-    <param name="dev" type="string" value="/dev/input/js1" /> <!-- change this /jsX depending on your joystick port -->
+    <param name="dev" type="string" value="/dev/input/js0" /> <!-- change this /jsX depending on your joystick port -->
     <param name="deadzone" value="0.15" />
   </node> 
 
