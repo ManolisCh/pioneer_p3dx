@@ -39,6 +39,7 @@
 		/exploration_polygon_marker
 		/explore_server/feedback
 		/explore_server/status
+                /explore_server/cancel
 		/clicked_point
   		/move_base/local_costmap/obstacle_layer_footprint/parameter_updates
             	/move_base/NavfnROS/plan

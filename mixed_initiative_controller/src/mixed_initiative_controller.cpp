@@ -32,7 +32,7 @@ private:
 
   ros::NodeHandle n_;
   ros::Subscriber control_mode_sub_, vel_sub_telop_, vel_sub_nav_ ;
-  ros::Publisher vel_pub_ , cancelGoal_pub_;
+  ros::Publisher vel_pub_ , cancelGoal_pub_, explorationCancel_pub_;
 
   geometry_msgs::Twist cmdVel_;
   actionlib_msgs::GoalID cancelGoal_;
@@ -46,6 +46,7 @@ Controller::Controller()
 
   vel_pub_ = n_.advertise<geometry_msgs::Twist>("cmd_vel", 50,this);
   cancelGoal_pub_ = n_.advertise<actionlib_msgs::GoalID>("/move_base/cancel", 5,this);
+  explorationCancel_pub_ = n_.advertise<actionlib_msgs::GoalID>("/explore_server/cancel", 5,this);
 
   /* Subscribes to:
    * "/control_mode" to take the relevant autonomy mode
@@ -105,6 +106,7 @@ void Controller::navCallback(const geometry_msgs::Twist& msg)
       cmdVel_.angular.z = 0;
       vel_pub_.publish(cmdVel_);
       cancelGoal_pub_.publish(cancelGoal_);
+      explorationCancel_pub_.publish(cancelGoal_);
     }
 }
 
@@ -122,6 +124,7 @@ void Controller::teleopCallback(const geometry_msgs::Twist& msg)
       cmdVel_.angular.z = 0;
       vel_pub_.publish(cmdVel_);
       cancelGoal_pub_.publish(cancelGoal_);
+      explorationCancel_pub_.publish(cancelGoal_);
     }
 }
 
