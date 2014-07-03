@@ -23,8 +23,6 @@
 <!-- rviz for visualization-->
 <node pkg="rviz" type="rviz" name="rviz" output="screen"/>
 
-<!-- Frontier exploration -->
- <include file="$(find experiments_launch)/launch/frontier_exploration.launch"/>
 
 <!-- secondary workload task-->
 <node pkg="pub_stimulus" type="pub_stimulus" name="pub_stimulus" output="screen"/>

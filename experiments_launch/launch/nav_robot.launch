@@ -41,5 +41,8 @@
 <!-- usb_cam -->
 <include file="$(find experiments_launch)/launch/usb_cam.launch"/>
 
+<!-- Frontier exploration -->
+ <include file="$(find experiments_launch)/launch/frontier_exploration.launch"/>
+
 
 </launch>
