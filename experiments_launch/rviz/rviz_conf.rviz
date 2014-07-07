@@ -3,8 +3,7 @@ Panels:
     Help Height: 0
     Name: Displays
     Property Tree Widget:
-      Expanded:
-        - /GoalPosition1
+      Expanded: ~
       Splitter Ratio: 0.510067
     Tree Height: 156
   - Class: rviz/Selection
@@ -104,13 +103,13 @@ Visualization Manager:
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 255; 25; 0
-      Enabled: true
+      Enabled: false
       Keep: 1
       Length: 0.3
       Name: Odometry
       Position Tolerance: 0.1
       Topic: /odom
-      Value: true
+      Value: false
     - Class: rviz/Marker
       Enabled: true
       Marker Topic: /exploration_polygon_marker
@@ -163,12 +162,12 @@ Visualization Manager:
       Axes Length: 1
       Axes Radius: 0.1
       Class: rviz/Pose
-      Color: 0; 0; 0
+      Color: 0; 0; 255
       Enabled: true
-      Head Length: 0.2
-      Head Radius: 0.1
+      Head Length: 0.25
+      Head Radius: 0.15
       Name: Pose SLAM
-      Shaft Length: 0.1
+      Shaft Length: 0.15
       Shaft Radius: 0.05
       Shape: Arrow
       Topic: /slam_out_pose
