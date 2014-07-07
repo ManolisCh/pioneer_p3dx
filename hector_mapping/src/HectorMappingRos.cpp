@@ -344,8 +344,8 @@ void HectorMappingRos::scanCallback(const sensor_msgs::LaserScan& scan)
       odom_to_base.setIdentity();
     }
     map_to_odom_ = tf::Transform(poseInfoContainer_.getTfTransform() * odom_to_base.inverse());
-    ros::Duration future_date_duration(0.05);
-    tfB_->sendTransform( tf::StampedTransform (map_to_odom_, scan.header.stamp  + future_date_duration, p_map_frame_, p_odom_frame_));
+    ros::Time tf_expiration = ros::Time::now() + ros::Duration(0.05);
+    tfB_->sendTransform( tf::StampedTransform (map_to_odom_,tf_expiration, p_map_frame_, p_odom_frame_));
   }
 
   if (p_pub_map_scanmatch_transform_){
