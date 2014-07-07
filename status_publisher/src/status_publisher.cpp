@@ -74,8 +74,8 @@ StatusPublisher::StatusPublisher(): it_(nh_)
                                                               &StatusPublisher::explResultCallback,this);
 
   // publishers
-  mode_pub_ = it_.advertise("/robot_status/mode", 1);
-  navStatus_pub_ = it_.advertise("/robot_status/nav",1);
+  mode_pub_ = it_.advertise("/robot_status/mode", 1, true);
+  navStatus_pub_ = it_.advertise("/robot_status/nav",1, true);
   timerPubStatus_ = nh_.createTimer(ros::Duration(0.100), &StatusPublisher::timerPubStatusCallback, this);
 
   // Path where the images are
@@ -183,6 +183,7 @@ StatusPublisher::StatusPublisher(): it_(nh_)
 
   // Publish the default mode
   mode_pub_.publish(rosImgStop_);
+  navStatus_pub_.publish(rosImgStop_);
 
 }
 
