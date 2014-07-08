@@ -15,7 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 ## System dependencies are found with CMake's conventions
-# find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost REQUIRED COMPONENTS system )
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -88,7 +88,7 @@ catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES pub_stimulus
   CATKIN_DEPENDS roscpp image_transport std_msgs sensor_msgs cv_bridge joy message_runtime
-#  DEPENDS system_lib
+  DEPENDS Boost
 )
 
 ###########

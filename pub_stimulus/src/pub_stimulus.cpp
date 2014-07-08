@@ -8,8 +8,10 @@
 #include <sensor_msgs/image_encodings.h>
 #include <ros/package.h>
 #include <pub_stimulus/TargetStimulus.h>
-
-
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_real.hpp>
+#include <boost/random/variate_generator.hpp>
+#include <time.h>
 
 
 
@@ -22,6 +24,8 @@ public:
   void run();
 
 private:
+  boost::mt19937 randomGen_;
+
 
   ros::NodeHandle nh_;
   image_transport::ImageTransport it_;
@@ -33,18 +37,27 @@ private:
   std::string pathBackground_, pathTarget_;
   cv_bridge::CvImage cvBackground_, cvTarget_ ;   // intermediate cv_bridge images
   sensor_msgs::Image rosImageBackground_ , rosImageTarget_  ; // ROS msg images
-
+  double target_pub_period_,var_pub_period_ ;
 };
-
 
 // Constractor
 StatusPublisher::StatusPublisher(): it_(nh_)
 {
+  randomGen_.seed(time(NULL));
+
+  ros::NodeHandle private_nh("pub_stimulus");
+   // Parameters
+  private_nh.param("target_pub_period", target_pub_period_, 10.0);
+  private_nh.param("var_pub_period", var_pub_period_, 4.0);
+
+  ROS_INFO("VAR %f", var_pub_period_);
+  ROS_INFO("TARGET %f", target_pub_period_);
+
 
   stimulus_pub_ = it_.advertise("/workload/img_stimulus", 1);
   targetPublished_pub = nh_.advertise<pub_stimulus::TargetStimulus>("/workload/target_published", 1);
     // The ros Duration controls the period in sec. that the target will appear.
-  timerTarget_ = nh_.createTimer(ros::Duration(10), &StatusPublisher::timerTargetCallback, this);
+  timerTarget_ = nh_.createTimer(ros::Duration(target_pub_period_ - (var_pub_period_/2) ), &StatusPublisher::timerTargetCallback, this);
 
 
   // Path where the image stimulus is
@@ -77,8 +90,18 @@ StatusPublisher::StatusPublisher(): it_(nh_)
 
 }
 
+ // The publish target callback
 void StatusPublisher::timerTargetCallback(const ros::TimerEvent&)
 {
+
+  boost::uniform_real<float> dist(0,var_pub_period_) ;
+  double var = dist(randomGen_);
+
+  // pause the timer for var amount of time
+  timerTarget_.stop();
+  ros::Duration(var).sleep();
+  timerTarget_.start();
+
   stimulus_pub_.publish(rosImageTarget_);
   targetPublishedMsg_.published.data = true;
   targetPublishedMsg_.header.stamp = ros::Time::now();
@@ -103,7 +126,7 @@ int main(int argc, char** argv)
   StatusPublisher publishstimulus;
 
 
-  ros::Rate loop_rate(5);
+  ros::Rate loop_rate(10);
 
   // The main Loop where everything is runing
 
