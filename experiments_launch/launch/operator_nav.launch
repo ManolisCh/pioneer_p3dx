@@ -19,10 +19,6 @@
 
 <!-- Hector trajectory server for keeping history and visualizing of all the paths visited -->
 <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="trajectory_server" output="screen"/>
-  
-<!-- rviz for visualization-->
-<node pkg="rviz" type="rviz" name="rviz" output="screen"/>
-
 
 <!-- secondary workload task-->
 <node pkg="pub_stimulus" type="pub_stimulus" name="pub_stimulus" output="screen">

@@ -13,6 +13,8 @@
                 /scan
                 /map
                 /map_metadata
+                /slam_out_pose
+                /poseupdate
                 /slam_gmapping/entropy
                 /tf
 		/trajectory	
