@@ -23,7 +23,7 @@ r for keeping history and visualizing of all the paths visited -->
 
 <!-- secondary workload task-->
 <node pkg="pub_stimulus" type="pub_stimulus" name="pub_stimulus" output="screen">
-<param name="target_pub_period"  value="4"/>
+<param name="target_pub_period"  value="10"/>
 <param name="var_pub_period"  value="2"/>
 </node>
 
