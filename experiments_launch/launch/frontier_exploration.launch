@@ -7,8 +7,8 @@
 
     <node pkg="frontier_exploration" type="explore_server" name="explore_server" output="screen" >
 
-        <param name="frequency" type="double" value="2.0"/>
-        <param name="goal_aliasing" type="double" value="$(arg sensor_range)"/>
+        <param name="frequency" type="double" value="5.0"/>
+        <param name="goal_aliasing" type="double" value="0.025"/>
 
   #All standard costmap_2d parameters as in move_base, other than BoundedExploreLayer
 
@@ -16,11 +16,11 @@
             footprint: [ [0.23, 0.21], [0.23, -0.21], [-0.23, -0.21], [-0.23, 0.21] ]
             
             transform_tolerance: 0.3
-            update_frequency: 2.0
-            publish_frequency: 2.0
+            update_frequency: 5.0
+            publish_frequency: 5.0
 
             #must match incoming static map
-            global_frame: /map #if complains has to be /odom when local planner and cost is /odom?
+            global_frame: /map
             robot_base_frame: /base_link
             resolution: 0.025
 
@@ -32,7 +32,6 @@
                 - {name: static,           type: "costmap_2d::StaticLayer"}            
                 - {name: explore_boundary, type: "frontier_exploration::BoundedExploreLayer"}
                 #Can disable sensor layer if gmapping is fast enough to update scans
-                - {name: sensor,           type: "costmap_2d::ObstacleLayer"}
                 - {name: inflation,        type: "costmap_2d::InflationLayer"}
 
             static:         
@@ -45,10 +44,7 @@
                 #set to false for gmapping, true if re-exploring a known area
                 explore_clear_space: false
 
-            sensor:
-                observation_sources: laser
-                laser: {data_type: LaserScan, clearing: true, marking: true, topic: scan, inf_is_valid: true, raytrace_range: $(arg sensor_range), obstacle_range: $(arg sensor_range)}
-
+            
             inflation:
                 inflation_radius: 0.4
       </rosparam>
