@@ -45,7 +45,7 @@ TrajectoryPlannerROS:
   meter_scoring: true
   forward_point_distance: 0.325 # default 0.325. The distance from the center point of robot to place an additional scoring point
   pdist_scale: 0.8 #weight on how much should stay close to path 
-  gdist_scale: 0.75 #weight on how much should attempt to reach is local goal, also controls speed.
+  gdist_scale: 0.77 #weight on how much should attempt to reach is local goal, also controls speed.
   occdist_scale:: 0.01 #weight on how much should attempt to avoid obstacles (in my experience leave like that!)
 
  
