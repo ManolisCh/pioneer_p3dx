@@ -36,6 +36,7 @@
 		/workload/img_stimulus/compressed
 		/workload/RT
 		/workload/target_published
+                /workload/missedRT
  		/workload/img_stimulus/compressed/parameter_descriptions
 		/explore_server/result
 		/exploration_polygon_marker
