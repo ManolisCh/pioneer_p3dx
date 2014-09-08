@@ -4,7 +4,7 @@
 <!-- launch rosbag tool but record certain topics-->
 <node pkg="rosbag" type="record" name="rosbag"
 
-       args="-o /home/manolis/rosbags/experiment1 
+       args="-o /home/manolis/rosbags/teleop/experiment 
                 /joy
                 /navigation/cmd_vel
                 /teleop/cmd_vel

@@ -14,27 +14,16 @@
 
 <!-- cmd mixer for choosing autonomy mode or e.g. emergency stop if nav doesnt work good. (buttons for teleoperation - stop - autonomy mode) -->
 <!-- In xbox controller Y =  teleop , A = auto , B = stop (in any case) -->
-<node pkg="mixed_initiative_controller" type="mixed_initiative_controller" name="mi_controller" output="screen"/>
+<node pkg="mixed_initiative_controller" type="mixed_initiative_controller" name="mi_controller" output="screen"/>>
 
 
-<!-- Hector trajectory serve
-r for keeping history and visualizing of all the paths visited -->
+<!-- Hector trajectory server for keeping history and visualizing of all the paths visited -->
 <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="trajectory_server" output="screen"/>
 
-<!-- secondary workload task-->
-<node pkg="pub_stimulus" type="pub_stimulus" name="pub_stimulus" output="screen">
-<param name="target_pub_period"  value="4"/>
-<param name="var_pub_period"  value="2"/>
-</node>
-
-<node pkg="pub_stimulus" type="workload_rt" name="workload_rt" output="screen"/>
-
-<!-- mode and status visualising node -->
-<node pkg="status_publisher" type="status_publisher" name="status_publisher" output="screen"/>
 
 <!-- RVIZ Interface -->
 <node pkg="rviz" type="rviz" name="rviz" 
-  args="-d $(find experiments_launch)/rviz_cfg/rviz_cfg.rviz"/>
+  args="-d $(find experiments_launch)/rviz_cfg/rviz_both_config.rviz"/>
 
 <!-- Robot Model -->
 <include file="$(find p2os_urdf)/launch/pioneer3dx_urdf.launch"/>

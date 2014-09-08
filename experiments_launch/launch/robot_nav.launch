@@ -11,8 +11,7 @@
   <param name="rot_accel" value="2.0"/>
   <remap from="/RosAria/cmd_vel" to="/cmd_vel" />
   <remap from="/RosAria/pose" to="odom" />
-  
- </node>
+   </node>
 
 
 <!-- hokuyo laser scaner drivers -->
