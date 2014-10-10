@@ -1,11 +1,11 @@
 <launch>
 
 <!-- tell to roscore that we will run in simulation-->
-
+<param name="/use_sim_time" value="true"/>
 
 <!-- start stage simulator -->
 <node pkg="stage_ros" type="stageros" name="stageros" args="$(find experiments_launch)/world/stage_pioneer.world" >
-<remap from="/base_scan" to="/scan" />
+<remap from="/base_scan" to="/laserDriverScan" />
 </node>
 
 <!-- joy node for aka joystick drivers-->
@@ -32,7 +32,7 @@
 <include file="$(find experiments_launch)/launch/move_base.launch"/>
 
 <!-- Frontier exploration -->
-<include file="$(find experiments_launch)/launch/frontier_exploration.launch"/>
+<!--include file="$(find experiments_launch)/launch/frontier_exploration.launch"/-->
 
 <!-- secondary workload task-->
 <node pkg="pub_stimulus" type="pub_stimulus" name="pub_stimulus" output="screen">
