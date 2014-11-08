@@ -27,6 +27,6 @@ inflation_radius: 0.4
 #Configuration for the sensors/topics that the costmap will use to update a map
 observation_sources: scan #kinect
 
-scan: {sensor frame: base_laser, data_type: LaserScan, topic: scan, expected_update_rate: 0.15, marking: true, clearing: true}
+scan: {sensor frame: base_laser, data_type: LaserScan, topic: scan, expected_update_rate: 0.10, marking: true, clearing: true}
 
 #kinect: {sensor frame: camera_link, data_type: PointCloud2, topic:  /voxel_grid/output , observation_persistence: 0.0, marking: true, clearing: true, min_obstacle_height: 0.05, max_obstacle_height: 1.0}

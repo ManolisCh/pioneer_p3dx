@@ -15,17 +15,19 @@
 
 
 <!-- hokuyo laser scaner drivers -->
-  <node name="hokuyo" pkg="hokuyo_node" type="hokuyo_node" respawn="false" output="screen">
+  <node name="hokuyo" pkg="urg_node" type="urg_node" respawn="false" output="screen">
     <param name="frame_id" type="string" value="base_laser"/>
     <param name="calibrate_time" type="bool" value="true"/> <!-- Starts up slow, but accurate timestamps  --> 
     <param name="port" type="string" value="/dev/ttyACM0"/> <!-- Set the port to connect to here -->
-    <param name="intensity" type="bool" value="false"/>
+    <param name="publish_intensity" type="bool" value="false"/>
+    <param name="angle_max" type="double" value="2.26"/>
+    <param name="angle_min" type="double" value="-2.26"/>
   </node>
 
 
 <!-- tf transform -->
 <!-- args ="x y z qx qy qz frame_id child_frame_id period_in_ms" -->
-<node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.20 0 0.20 0 0 0 base_link base_laser 50" />
+<node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.20 0 0.20 0 0 0 base_link base_laser 40" />
 
 
 <!-- Gmapping SLAM -->
