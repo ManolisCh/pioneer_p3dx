@@ -1,7 +1,7 @@
 
 <launch>
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
-      <param name="odom_frame" value="odom"/>
+      <param name="odom_frame" value="odom"/> 
       <param name="map_update_interval" value="2"/>
       <param name="maxUrange" value="30"/>
       <param name="sigma" value="0.05"/>
@@ -32,5 +32,6 @@
       <param name="lasamplestep" value="0.005"/>
      <param name="occ_thresh" value="0.20"/>
      <param name="maxRange" value="30"/>
+     <remap from="scan" to="scan_filtered" />
     </node>
 </launch>
