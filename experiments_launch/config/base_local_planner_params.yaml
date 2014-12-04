@@ -17,7 +17,7 @@ TrajectoryPlannerROS:
   acc_lim_th: 2.0 
 
   #Set the velocity limits of the robot
-  max_vel_x: 0.5
+  max_vel_x: 0.4
   min_vel_x: 0.1
   max_vel_theta: 1.0
   min_vel_theta: -1.0
@@ -44,8 +44,8 @@ TrajectoryPlannerROS:
   publish_cost_grid_pc: true  # publish the cost used when planning as pointcloud2 at <name>/cost_cloud topic
   meter_scoring: true
   forward_point_distance: 0.325 # default 0.325. The distance from the center point of robot to place an additional scoring point
-  pdist_scale: 0.8 #weight on how much should stay close to path 
-  gdist_scale: 0.77 #weight on how much should attempt to reach is local goal, also controls speed.
+  pdist_scale: 0.62 #weight on how much should stay close to path 
+  gdist_scale: 0.78 #weight on how much should attempt to reach is local goal, also controls speed.
   occdist_scale:: 0.01 #weight on how much should attempt to avoid obstacles (in my experience leave like that!)
 
  

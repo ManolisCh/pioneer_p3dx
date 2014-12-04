@@ -7,18 +7,18 @@ map_type: costmap #"voxel" or "costmap", with the difference between them being 
 #transform_tolerance: 0.2
 
 #Obstacle marking parameters
-obstacle_range: 4 #maximum range sensor reading that will result in an obstacle being put into the costma(meters)
-raytrace_range: 4 #range in meters at which to raytrace out obstacles from the map using sensor data. This can be over-ridden on a per-sensor basis.
+obstacle_range: 3 #maximum range sensor reading that will result in an obstacle being put into the costma(meters)
+raytrace_range: 28 #range in meters at which to raytrace out obstacles from the map using sensor data. This can be over-ridden on a per-sensor basis.
 
 #The footprint of the robot 
-footprint: [ [0.22, 0.205], [0.22, -0.205], [-0.23, -0.205], [-0.23, 0.205] ]
+footprint: [ [0.22, 0.205], [0.22, -0.205], [-0.24, -0.205], [-0.24, 0.205] ]
 
 #Inscribed and circumscribed radius 
 #inscribed_radius: 0.2
 #circumscribed_radius: 0.3
 
 #Cost function parameters
-inflation_radius: 0.37
+inflation_radius: 0.40
 #cost_scaling_factor: 10.0
 
 #The cost at which a cell is considered an obstacle when a map is read from the map_server
@@ -27,6 +27,6 @@ inflation_radius: 0.37
 #Configuration for the sensors/topics that the costmap will use to update a map
 observation_sources: scan #kinect
 
-scan: {sensor frame: base_laser, data_type: LaserScan, topic: scan_filtered, expected_update_rate: 0.10, marking: true, clearing: true}
+scan: {sensor frame: base_laser, data_type: LaserScan, topic: scan_filtered, expected_update_rate: 0.5, marking: true, clearing: true}
 
 #kinect: {sensor frame: camera_link, data_type: PointCloud2, topic:  /voxel_grid/output , observation_persistence: 0.0, marking: true, clearing: true, min_obstacle_height: 0.05, max_obstacle_height: 1.0}
