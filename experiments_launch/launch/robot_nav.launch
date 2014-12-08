@@ -8,7 +8,7 @@
   <param name="port" value="/dev/ttyUSB0" />
   <param name="trans_decel" value="1"/>
   <param name="trans_accel" value="0.5"/>
-  <param name="rot_accel" value="2.0"/>
+  <param name="rot_accel" value="2"/>
   <remap from="/RosAria/cmd_vel" to="/cmd_vel" />
   <remap from="/RosAria/pose" to="odom" />
    </node>
@@ -31,14 +31,14 @@
 
 <!-- tf transform -->
 <!-- args ="x y z qx qy qz frame_id child_frame_id period_in_ms" -->
-<node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.20 0 0.20 0 0 0 base_link base_laser 25" />
+<node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.20 0 0.20 0 0 0 /base_link /base_laser 25" />
 
 
 <!-- Gmapping SLAM -->
-<!--include file="$(find experiments_launch)/launch/slam_gmapping.launch"/-->
+<include file="$(find experiments_launch)/launch/slam_gmapping.launch"/>
 
 <!-- Hector SLAM -->
-<include file="$(find experiments_launch)/launch/hector_slam.launch"/>
+<!--include file="$(find experiments_launch)/launch/hector_slam.launch"/-->
 
 <!-- Navigation stuff / move_base -->
 <include file="$(find experiments_launch)/launch/move_base.launch"/>
