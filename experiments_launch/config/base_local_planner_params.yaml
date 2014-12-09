@@ -26,7 +26,7 @@ TrajectoryPlannerROS:
   
   holonomic_robot: false
 
-  #Set the tolerance on achieving a goal. With bad lacalazation put hight tolerence.
+  #Set the tolerance on achieving a goal. With bad localazation put hight tolerence.
   xy_goal_tolerance: 0.1
   yaw_goal_tolerance: 0.08 
 
@@ -36,7 +36,7 @@ TrajectoryPlannerROS:
   sim_granularity: 0.025
 
   #The number of samples to use when exploring the x and theta velocity space
-  vx_samples: 15 # for DWA planner 8 - 15 depending on the processing power. This allows for non-circular curves. 
+  vx_samples: 13 # for DWA planner 8 - 15 depending on the processing power. This allows for non-circular curves. 
   vtheta_samples: 20
 
 
@@ -44,11 +44,11 @@ TrajectoryPlannerROS:
   publish_cost_grid_pc: true  # publish the cost used when planning as pointcloud2 at <name>/cost_cloud topic
   meter_scoring: true
   forward_point_distance: 0.325 # default 0.325. The distance from the center point of robot to place an additional scoring point
-  pdist_scale: 0.75 #weight on how much should stay close to path 
-  gdist_scale: 0.65 #weight on how much should attempt to reach is local goal, also controls speed.
-  occdist_scale:: 0.01 #weight on how much should attempt to avoid obstacles (in my experience leave like that!)
+  pdist_scale: 0.72 #weight on how much should stay close to path 
+  gdist_scale: 0.69 #weight on how much should attempt to reach is local goal, also controls speed.
+  occdist_scale: 0.01 #weight on how much should attempt to avoid obstacles (in my experience leave like that!)
 
- 
+  prune_plan: true
 
 
 
