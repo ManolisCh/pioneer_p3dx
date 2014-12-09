@@ -4,13 +4,14 @@
 <!-- launch rosbag tool but record certain topics-->
 <node pkg="rosbag" type="record" name="rosbag"
 
-       args="-o /home/manolis/rosbags/teleop/experiment 
+       args="-o /home/manolis/rosbags/experiment_1 
                 /joy
                 /navigation/cmd_vel
                 /teleop/cmd_vel
                 /cmd_vel
                 /odom
                 /scan
+                /scan_filtered
                 /map
                 /map_metadata
                 /slam_out_pose
@@ -38,12 +39,7 @@
 		/workload/target_published
                 /workload/missedRT
  		/workload/img_stimulus/compressed/parameter_descriptions
-		/explore_server/result
-		/exploration_polygon_marker
-		/explore_server/feedback
-		/explore_server/status
-                /explore_server/cancel
-		/clicked_point
+	        /clicked_point
   		/move_base/local_costmap/obstacle_layer_footprint/parameter_updates
             	/move_base/NavfnROS/plan
             	/move_base/status
