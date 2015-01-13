@@ -44,7 +44,7 @@ TrajectoryPlannerROS:
   publish_cost_grid_pc: true  # publish the cost used when planning as pointcloud2 at <name>/cost_cloud topic
   meter_scoring: true
   forward_point_distance: 0.325 # default 0.325. The distance from the center point of robot to place an additional scoring point
-  pdist_scale: 0.72 #weight on how much should stay close to path 
+  pdist_scale: 0.71 #weight on how much should stay close to path 
   gdist_scale: 0.69 #weight on how much should attempt to reach is local goal, also controls speed.
   occdist_scale: 0.01 #weight on how much should attempt to avoid obstacles (in my experience leave like that!)
 

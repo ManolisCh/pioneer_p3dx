@@ -41,6 +41,7 @@ void LaserNoise::laserReadCallBAck(const sensor_msgs::LaserScan::ConstPtr& msg)
 {
 
     double sigma;
+    double oldRange;
     addedNoiseScan_ = *msg ;
 
 
@@ -50,13 +51,14 @@ void LaserNoise::laserReadCallBAck(const sensor_msgs::LaserScan::ConstPtr& msg)
 
         {
             sigma = addedNoiseScan_.ranges[i] * 0.1; // Proportional standard deviation
+            oldRange = addedNoiseScan_.ranges[i] ;
             addedNoiseScan_.ranges[i] = addedNoiseScan_.ranges[i] + GaussianKernel(0,sigma);
 
             if (addedNoiseScan_.ranges[i] > addedNoiseScan_.range_max)
             { addedNoiseScan_.ranges[i] = addedNoiseScan_.range_max;}
 
             else if (addedNoiseScan_.ranges[i] < addedNoiseScan_.range_min)
-            { addedNoiseScan_.ranges[i] = addedNoiseScan_.range_min;}
+            { addedNoiseScan_.ranges[i] = oldRange;}
         }
     }
 
