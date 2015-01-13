@@ -32,6 +32,6 @@
       <param name="lasamplestep" value="0.005"/>
      <param name="occ_thresh" value="0.20"/>
      <param name="maxRange" value="28"/>
-     <remap from="scan" to="scan_filtered" />
+     <remap from="scan" to="scan_final" />
     </node>
 </launch>

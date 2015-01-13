@@ -11,8 +11,10 @@ public:
     LaserNoise()
     {
 
-        laser_sub_ = n_.subscribe<sensor_msgs::LaserScan>("laserDriverScan", 50, &LaserNoise::laserReadCallBAck, this);
-        scan_pub_ = n_.advertise<sensor_msgs::LaserScan>("scan", 50);
+        laser_sub_ = n_.subscribe<sensor_msgs::LaserScan>("scan", 50, &LaserNoise::laserReadCallBAck, this);
+        scan_pub_ = n_.advertise<sensor_msgs::LaserScan>("scan_with_noise", 50);
+        timerNoise_ = n_.createTimer(ros::Duration(60) , &LaserNoise::timerNoiseCallback, this);
+        noiseTriger_ = 0;
     }
 
 private:
@@ -23,7 +25,10 @@ private:
 
     void laserReadCallBAck(const sensor_msgs::LaserScan::ConstPtr& msg);
     double GaussianKernel(double mu,double sigma);
+    void timerNoiseCallback(const ros::TimerEvent&);
+    ros::Timer timerNoise_ ;
 
+    bool noiseTriger_;
 };
 
 
@@ -34,21 +39,26 @@ private:
 void LaserNoise::laserReadCallBAck(const sensor_msgs::LaserScan::ConstPtr& msg)
 
 {
+
+    double sigma;
     addedNoiseScan_ = *msg ;
 
 
-    for (int i=0; i < addedNoiseScan_.ranges.size() ; i++)
-
+    if (noiseTriger_ == 1)
     {
-    addedNoiseScan_.ranges[i] = addedNoiseScan_.ranges[i] + GaussianKernel(0,2);
+        for (int i=0; i < addedNoiseScan_.ranges.size() ; i++)
 
-    if (addedNoiseScan_.ranges[i] > addedNoiseScan_.range_max)
-       { addedNoiseScan_.ranges[i] = addedNoiseScan_.range_max;}
+        {
+            sigma = addedNoiseScan_.ranges[i] * 0.1; // Proportional standard deviation
+            addedNoiseScan_.ranges[i] = addedNoiseScan_.ranges[i] + GaussianKernel(0,sigma);
 
-    else if (addedNoiseScan_.ranges[i] < addedNoiseScan_.range_min)
-       { addedNoiseScan_.ranges[i] = addedNoiseScan_.range_min;}
+            if (addedNoiseScan_.ranges[i] > addedNoiseScan_.range_max)
+            { addedNoiseScan_.ranges[i] = addedNoiseScan_.range_max;}
+
+            else if (addedNoiseScan_.ranges[i] < addedNoiseScan_.range_min)
+            { addedNoiseScan_.ranges[i] = addedNoiseScan_.range_min;}
+        }
     }
-
 
 
 
@@ -56,6 +66,18 @@ void LaserNoise::laserReadCallBAck(const sensor_msgs::LaserScan::ConstPtr& msg)
 
     scan_pub_.publish(addedNoiseScan_);
 
+
+}
+
+// Noise triger callback
+void LaserNoise::timerNoiseCallback(const ros::TimerEvent&)
+{
+
+    // alternates between noise and no noise every 1:30 mins
+    if (noiseTriger_ == 0)
+        noiseTriger_ = 1;
+    else
+        noiseTriger_ = 0;
 
 }
 

@@ -5,11 +5,13 @@
 
 <!-- start stage simulator -->
 <node pkg="stage_ros" type="stageros" name="stageros" args="$(find experiments_launch)/world/stage_pioneer.world" >
-<remap from="/base_scan" to="/laserDriverScan" />
+<remap from="/base_scan" to="/scan" />
 </node>
 
-<!-- Laser noise node-->
-  <node respawn="true" pkg="laser_noise" type="laser_noise_node" name="laser_noise" />
+<!-- Laser noise node to add some extra noise-->
+  <node respawn="true" pkg="laser_noise" type="laser_noise_node" name="laser_noise" > 
+       <remap from="/scan_with_noise" to="/scan_final" />
+  </node>
 
 <!-- joy node for aka joystick drivers-->
   <node respawn="true" pkg="joy" type="joy_node" name="joy_node" >
