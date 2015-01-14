@@ -1,5 +1,8 @@
 #include <ros/ros.h>
 #include <sensor_msgs/LaserScan.h>
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_real.hpp>
+#include <boost/random/variate_generator.hpp>
 
 
 
@@ -10,7 +13,7 @@ class LaserNoise
 public:
     LaserNoise()
     {
-
+        randomGen_.seed(time(NULL)); // seed the generator
         laser_sub_ = n_.subscribe<sensor_msgs::LaserScan>("scan", 50, &LaserNoise::laserReadCallBAck, this);
         scan_pub_ = n_.advertise<sensor_msgs::LaserScan>("scan_with_noise", 50);
         timerNoise_ = n_.createTimer(ros::Duration(60) , &LaserNoise::timerNoiseCallback, this);
@@ -18,6 +21,9 @@ public:
     }
 
 private:
+
+    boost::mt19937 randomGen_;
+
     ros::NodeHandle n_;
     ros::Subscriber laser_sub_ ;
     ros::Publisher scan_pub_ ;
@@ -44,23 +50,57 @@ void LaserNoise::laserReadCallBAck(const sensor_msgs::LaserScan::ConstPtr& msg)
     double oldRange;
     addedNoiseScan_ = *msg ;
 
+    // random uniform distribution generator for activating noise in random intervals
+   boost::uniform_real<float> dist2(0,2) ;
+   double timeInterval = dist2(randomGen_);
+
+    // random uniform distribution generator for unifrom noise
+    boost::uniform_real<float> distNoise(0,4) ; // noise will be between 0 and 4 meters
+    double noise = distNoise(randomGen_);
+
+    // random number generator to add noise in a random reading
+    boost::uniform_real<float> distPoint(0,(addedNoiseScan_.ranges.size()*0.8)-1 ) ;
+    double point = int(distPoint(randomGen_));
+
+    if (point < 0) // safe that the point of measurement will be not negative
+        point == 0;
+
+    //uniform noise added to a group of reading withint close proximity
 
     if (noiseTriger_ == 1)
     {
-        for (int i=0; i < addedNoiseScan_.ranges.size() ; i++)
+        for (int i= point; i < (point + 20) ; i++)
 
         {
-            sigma = addedNoiseScan_.ranges[i] * 0.1; // Proportional standard deviation
             oldRange = addedNoiseScan_.ranges[i] ;
-            addedNoiseScan_.ranges[i] = addedNoiseScan_.ranges[i] + GaussianKernel(0,sigma);
+            addedNoiseScan_.ranges[i] = addedNoiseScan_.ranges[i] + noise;
 
             if (addedNoiseScan_.ranges[i] > addedNoiseScan_.range_max)
             { addedNoiseScan_.ranges[i] = addedNoiseScan_.range_max;}
 
             else if (addedNoiseScan_.ranges[i] < addedNoiseScan_.range_min)
-            { addedNoiseScan_.ranges[i] = oldRange;}
+            { addedNoiseScan_.ranges[i] = addedNoiseScan_.range_min;}
         }
     }
+
+
+    // Guassian noise added
+//    if (noiseTriger_ == 1)
+//    {
+//        for (int i=0; i < addedNoiseScan_.ranges.size() ; i++)
+
+//        {
+//            sigma = addedNoiseScan_.ranges[i] * 0.1; // Proportional standard deviation
+//            oldRange = addedNoiseScan_.ranges[i] ;
+//            addedNoiseScan_.ranges[i] = addedNoiseScan_.ranges[i] + GaussianKernel(0,sigma);
+
+//            if (addedNoiseScan_.ranges[i] > addedNoiseScan_.range_max)
+//            { addedNoiseScan_.ranges[i] = addedNoiseScan_.range_max;}
+
+//            else if (addedNoiseScan_.ranges[i] < addedNoiseScan_.range_min)
+//            { addedNoiseScan_.ranges[i] = oldRange;}
+//        }
+//    }
 
 
 
