@@ -16,9 +16,9 @@ public:
     {
         //randomGen_.seed(time(NULL)); // seed the generator
         laser_sub_ = n_.subscribe<sensor_msgs::LaserScan>("scan", 50, &LaserNoise::laserReadCallBAck, this);
-        pose_sub_ = n_.subscribe<geometry_msgs::PoseWithCovarianceStamped>("amcl_pose", 50, &LaserNoise::poseCallback, this);
+       // pose_sub_ = n_.subscribe<geometry_msgs::PoseWithCovarianceStamped>("amcl_pose", 50, &LaserNoise::poseCallback, this);
         scan_pub_ = n_.advertise<sensor_msgs::LaserScan>("scan_with_noise", 50);
-        //timerNoise_ = n_.createTimer(ros::Duration(15) , &LaserNoise::timerNoiseCallback, this);
+        timerNoise_ = n_.createTimer(ros::Duration(30) , &LaserNoise::timerNoiseCallback, this);
         noiseTriger_ = 0;
     }
 
@@ -33,8 +33,8 @@ private:
 
     void laserReadCallBAck(const sensor_msgs::LaserScan::ConstPtr& msg);
     double GaussianKernel(double mu,double sigma), uniformNoise_;
-    void poseCallback(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg);
-    //void timerNoiseCallback(const ros::TimerEvent&);
+    //void poseCallback(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg);
+    void timerNoiseCallback(const ros::TimerEvent&);
     //  int point_;
     ros::Timer timerNoise_ ;
 
@@ -124,32 +124,32 @@ void LaserNoise::laserReadCallBAck(const sensor_msgs::LaserScan::ConstPtr& msg)
 
 }
 
-void LaserNoise::poseCallback(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg)
+//void LaserNoise::poseCallback(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg)
 
-{
-
-    if ( (msg->pose.pose.position.x < 18.65) && (msg->pose.pose.position.x > 14.08)
-         && (msg->pose.pose.position.y < 19.44) && (msg->pose.pose.position.y > 15.72) )
-
-    {
-        noiseTriger_ =1;
-    }
-    else
-        noiseTriger_ = 0;
-}
-
-// Noise triger callback
-//void LaserNoise::timerNoiseCallback(const ros::TimerEvent&)
 //{
-//    //uniformTriger_ = 1; // activate uniform noise
 
-//    // alternates between noise and no noise every 1:30 mins
-//    if (noiseTriger_ == 0)
-//        noiseTriger_ = 1;
+//    if ( (msg->pose.pose.position.x < 18.65) && (msg->pose.pose.position.x > 14.08)
+//         && (msg->pose.pose.position.y < 19.44) && (msg->pose.pose.position.y > 15.72) )
+
+//    {
+//        noiseTriger_ =1;
+//    }
 //    else
 //        noiseTriger_ = 0;
-
 //}
+
+// Noise triger callback
+void LaserNoise::timerNoiseCallback(const ros::TimerEvent&)
+{
+    //uniformTriger_ = 1; // activate uniform noise
+
+    // alternates between noise and no noise
+    if (noiseTriger_ == 0)
+        noiseTriger_ = 1;
+    else
+        noiseTriger_ = 0;
+
+}
 
 
 // Utility for adding noise
