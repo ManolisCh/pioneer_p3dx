@@ -12,6 +12,7 @@
                 /odom
                 /scan
                 /scan_filtered
+                /scan_final
                 /map
                 /map_metadata
                 /slam_out_pose
