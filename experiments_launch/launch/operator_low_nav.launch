@@ -1,5 +1,10 @@
 <launch>
 
+<!-- Filter laser scane to remove veiling effect -->
+<node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter">
+    <rosparam command="load" file="$(find experiments_launch)/config/laser_filter.yaml" />
+    <remap from="/scan_filtered" to="/scan_final" />
+</node>
 
 <!-- joy node -->
   <node respawn="true" pkg="joy" type="joy_node" name="joy_node" >
@@ -31,6 +36,7 @@ r for keeping history and visualizing of all the paths visited -->
 
 <!-- mode and status visualising node -->
 <node pkg="status_publisher" type="status_publisher" name="status_publisher" output="screen"/>
+
 
 <!-- RVIZ Interface -->
 <node pkg="rviz" type="rviz" name="rviz" 
