@@ -4,7 +4,7 @@
 <!-- launch rosbag tool but record certain topics-->
 <node pkg="rosbag" type="record" name="rosbag"
 
-       args="-o /home/manolis/rosbags/experiment_1 
+       args="-o /home/robot/
                 /joy
                 /navigation/cmd_vel
                 /teleop/cmd_vel
@@ -27,20 +27,15 @@
                 /RosAria/battery_state_of_charge
                 /RosAria/battery_voltage
                 /usb_cam/image_raw/compressed
-                /usb_cam/camera_info
                 /control_mode
                 /experiment_started
               	/robot_status/nav/compressed
-		/robot_status/mode/compressed/parameter_descriptions
- 		/robot_status/nav/compressed/parameter_updates
  		/robot_status/mode/compressed
-		/robot_status/mode/compressed/parameter_updates
 		/workload/img_stimulus/compressed
 		/workload/RT
 		/workload/target_published
                 /workload/missedRT
- 		/workload/img_stimulus/compressed/parameter_descriptions
-	        /clicked_point
+ 	        /clicked_point
   		/move_base/local_costmap/obstacle_layer_footprint/parameter_updates
             	/move_base/NavfnROS/plan
             	/move_base/status
